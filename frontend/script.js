@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // API endpoint for Netlify Functions
+    const API_ENDPOINT = '/.netlify/functions/api/convert';
+    
     const dropArea = document.getElementById('drop-area');
     const fileInput = document.getElementById('fileInput');
     const uploadButton = document.getElementById('uploadButton');
@@ -210,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('file', uploadedFile);
 
         try {
-            const response = await fetch('/convert', {
+            const response = await fetch(API_ENDPOINT, {
                 method: 'POST',
                 body: formData
             });

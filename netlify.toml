@@ -1,17 +1,17 @@
-   [build]
-     # Directory to change to before starting a build
-     base = "/"
-     
-     # Directory that contains the deploy-ready HTML files and assets
-     publish = "frontend/"
-     
-     # Build command
-     command = "# No build command needed for this project"
+[build]
+  publish = "frontend/"
+  command = "# No build command needed"
 
-   [functions]
-     directory = "backend/"
+[functions]
+  directory = "netlify/functions/"
+  node_bundler = "esbuild"
 
-   [[redirects]]
-     from = "/api/*"
-     to = "/.netlify/functions/:splat"
-     status = 200
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

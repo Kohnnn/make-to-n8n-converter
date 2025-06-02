@@ -1,0 +1,5 @@
+Flask==2.3.2
+Flask-CORS==4.0.0
+Werkzeug==2.3.6
+python-dateutil==2.8.2
+netlify_lambda_wsgi==0.1.9 

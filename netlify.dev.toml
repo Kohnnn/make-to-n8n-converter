@@ -1,0 +1,7 @@
+[dev]
+  framework = "#static"
+  publish = "frontend"
+  command = "echo 'No build command needed for frontend'"
+  targetPort = 8888
+  port = 3000
+  autoLaunch = true 

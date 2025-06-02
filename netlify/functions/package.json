@@ -1,0 +1,9 @@
+{
+  "name": "make-to-n8n-converter-functions",
+  "version": "1.0.0",
+  "description": "Netlify Functions for Make.com to n8n converter",
+  "main": "index.js",
+  "dependencies": {
+    "@netlify/functions": "^1.6.0"
+  }
+} 
