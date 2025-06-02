@@ -1,0 +1,226 @@
+:root {
+    --primary-color: #ff6600;
+    --primary-hover: #ff8533;
+    --secondary-color: #5096ff;
+    --secondary-hover: #72aaff;
+    --background-color: #f5f7fa;
+    --container-bg: #ffffff;
+    --text-color: #333333;
+    --border-color: #dce1e8;
+    --error-color: #ff3b30;
+    --success-color: #34c759;
+    --info-color: #5096ff;
+    --warning-color: #ff9500;
+    --drop-highlight: #e8f1fb;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--container-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1.5rem;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    gap: 10px;
+}
+
+.drop-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.drop-area:hover {
+    border-color: var(--primary-color);
+    background-color: var(--drop-highlight);
+}
+
+.drop-area.highlight {
+    border-color: var(--primary-color);
+    background-color: var(--drop-highlight);
+}
+
+.button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: var(--primary-hover);
+}
+
+.button:disabled {
+    background-color: var(--border-color);
+    cursor: not-allowed;
+}
+
+.button.secondary {
+    background-color: var(--secondary-color);
+}
+
+.button.secondary:hover {
+    background-color: var(--secondary-hover);
+}
+
+a.button {
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.actions-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.status-message {
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    display: none;
+}
+
+.status-message.error {
+    display: block;
+    background-color: rgba(255, 59, 48, 0.1);
+    color: var(--error-color);
+    border-left: 4px solid var(--error-color);
+}
+
+.status-message.success {
+    display: block;
+    background-color: rgba(52, 199, 89, 0.1);
+    color: var(--success-color);
+    border-left: 4px solid var(--success-color);
+}
+
+.status-message.info {
+    display: block;
+    background-color: rgba(80, 150, 255, 0.1);
+    color: var(--info-color);
+    border-left: 4px solid var(--info-color);
+}
+
+.warnings-container {
+    background-color: rgba(255, 149, 0, 0.1);
+    color: var(--warning-color);
+    border-left: 4px solid var(--warning-color);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+}
+
+.warnings-container:empty {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.error-details {
+    background-color: rgba(255, 59, 48, 0.05);
+    border: 1px solid var(--error-color);
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.code-block {
+    background-color: #f2f2f2;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    white-space: pre-wrap;
+    margin-top: 1rem;
+}
+
+.import-instructions, .json-preview {
+    background-color: rgba(80, 150, 255, 0.05);
+    border: 1px solid var(--secondary-color);
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.import-instructions ol {
+    margin-left: 1.5rem;
+}
+
+.import-instructions li {
+    margin-bottom: 0.5rem;
+}
+
+footer {
+    margin-top: 3rem;
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .buttons-container, .actions-row {
+        flex-direction: column;
+    }
+    
+    .button {
+        width: 100%;
+    }
+}

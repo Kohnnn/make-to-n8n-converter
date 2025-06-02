@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make.com to n8n Workflow Converter</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Make.com to n8n Workflow Converter</h1>
+        <p>Upload your Make.com workflow JSON file to convert it to n8n format.</p>
+
+        <div class="buttons-container">
+            <button id="sampleWorkflowButton" class="button secondary">
+                <i class="fas fa-vial"></i> Try Sample Workflow
+            </button>
+            <a href="https://docs.n8n.io/integrations/" target="_blank" class="button secondary">
+                <i class="fas fa-book"></i> n8n Docs
+            </a>
+        </div>
+
+        <div id="drop-area" class="drop-area">
+            <p>Drag & Drop your Make.com JSON here or click to select file</p>
+            <input type="file" id="fileInput" accept=".json" hidden>
+        </div>
+        <button id="uploadButton" class="button" disabled>Upload & Convert</button>
+
+        <div id="status-message" class="status-message"></div>
+        <div id="warnings-container" class="warnings-container"></div>
+        
+        <div id="error-details" class="error-details hidden">
+            <h3>Error Details</h3>
+            <p id="error-message"></p>
+            <div id="error-stack" class="code-block"></div>
+        </div>
+
+        <div id="download-section" class="hidden">
+            <h2>Conversion Complete!</h2>
+            <p>Your n8n workflow JSON is ready.</p>
+            <div class="actions-row">
+                <button id="downloadButton" class="button">
+                    <i class="fas fa-download"></i> Download n8n Workflow
+                </button>
+                <button id="copyButton" class="button">
+                    <i class="fas fa-copy"></i> Copy to Clipboard
+                </button>
+                <button id="viewJsonButton" class="button secondary">
+                    <i class="fas fa-eye"></i> View JSON
+                </button>
+            </div>
+            
+            <div class="import-instructions hidden" id="import-instructions">
+                <h3>How to Import the Workflow in n8n</h3>
+                <ol>
+                    <li>Open your n8n instance</li>
+                    <li>Go to Workflows</li>
+                    <li>Click "Import from File" button</li>
+                    <li>Select your downloaded JSON workflow file</li>
+                    <li>Configure any credentials or parameters as needed</li>
+                </ol>
+            </div>
+
+            <div class="json-preview hidden" id="json-preview">
+                <h3>JSON Preview</h3>
+                <pre id="json-content" class="code-block"></pre>
+            </div>
+        </div>
+
+        <footer>
+            <p>Make.com to n8n Converter | <a href="https://github.com/yourusername/make-to-n8n-converter" target="_blank">GitHub</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
