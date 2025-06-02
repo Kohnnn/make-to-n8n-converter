@@ -37,8 +37,19 @@ def convert_workflow():
     
     if file and file.filename.endswith('.json'):
         try:
-            # In serverless, we process the file in memory instead of saving
-            make_json = json.loads(file.read().decode('utf-8'))
+            # Read file content as text first to check for HTML
+            file_content = file.read().decode('utf-8')
+            
+            # Check if content starts with HTML doctype or tags - likely invalid
+            if file_content.strip().startswith(('<!DOCTYPE', '<html')):
+                return jsonify({
+                    "success": False,
+                    "error": "Received HTML content instead of JSON. This can happen when downloading from Make.com via browser save. Please use the 'Export blueprint' option in Make.com.",
+                    "stack": "HTML content detected in JSON file"
+                }), 400
+            
+            # Parse the JSON content
+            make_json = json.loads(file_content)
             
             # Parse Make.com JSON
             parser = MakeComParser(make_json)
@@ -59,11 +70,11 @@ def convert_workflow():
                 "warnings": mapped_data["warnings"]
             })
 
-        except json.JSONDecodeError:
+        except json.JSONDecodeError as e:
             return jsonify({
                 "success": False,
-                "error": "Invalid JSON file",
-                "stack": traceback.format_exc()
+                "error": f"Invalid JSON format: {str(e)}",
+                "stack": f"Line {e.lineno}, column {e.colno}: {e.msg}"
             }), 400
         except Exception as e:
             return jsonify({

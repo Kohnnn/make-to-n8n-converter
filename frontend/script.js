@@ -169,17 +169,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const file = files[0];
-        if (file.type !== 'application/json') {
+        if (!file.name.toLowerCase().endsWith('.json') && file.type !== 'application/json') {
             displayStatus('error', 'Invalid file type. Please upload a JSON file.');
             uploadedFile = null;
             uploadButton.disabled = true;
             return;
         }
 
-        uploadedFile = file;
-        displayStatus('success', `File selected: ${file.name}`);
-        uploadButton.disabled = false;
-        resetUI();
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                JSON.parse(e.target.result);
+                uploadedFile = file;
+                displayStatus('success', `File selected: ${file.name}`);
+                uploadButton.disabled = false;
+                resetUI();
+            } catch (error) {
+                displayStatus('error', 'Invalid JSON content. Please check your file.');
+                uploadedFile = null;
+                uploadButton.disabled = true;
+            }
+        };
+        reader.onerror = function() {
+            displayStatus('error', 'Error reading the file.');
+            uploadedFile = null;
+            uploadButton.disabled = true;
+        };
+        reader.readAsText(file);
     }
 
     // Sample workflow button

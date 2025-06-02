@@ -116,3 +116,24 @@ make-to-n8n-converter/
 ## Contributing
 
 Contributions are welcome! Please help expand the module mappings or improve the conversion logic by submitting pull requests.
+
+## Usage
+
+### Exporting Make.com Workflows
+
+To properly export your Make.com workflow for conversion:
+
+1. Open your workflow in Make.com
+2. Click the three dots menu (⋮) in the top right corner
+3. Select "Export blueprint"
+4. Save the file with a `.json` extension
+5. Do NOT use browser's "Save as" or "View source" options as these will save HTML instead of JSON
+
+> **Important**: If you get an error message about HTML content, make sure you're using the "Export blueprint" option in Make.com.
+
+### Converting Workflows
+
+1. Upload your Make.com JSON file using the web interface
+2. Click "Upload & Convert" to process the workflow
+3. Download the converted n8n workflow JSON
+4. Import the converted workflow into your n8n instance
