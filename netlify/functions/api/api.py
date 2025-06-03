@@ -9,7 +9,7 @@ backend_path = os.path.join(project_root)
 sys.path.insert(0, backend_path)
 
 # Import the Flask app
-from netlify.functions.api.flask_app import app
+from backend.netlify.functions.api.flask_app import app
 
 # Configure app for serverless
 app.debug = False

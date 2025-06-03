@@ -25,7 +25,7 @@ except FileNotFoundError:
     print(f"Warning: Mappings file not found. Using empty mappings.")
 
 # For serverless, we'll need to handle file uploads differently
-@app.route('/convert', methods=['POST'])
+@app.route('/', methods=['POST'])
 def convert_workflow():
     if 'file' not in request.files:
         return jsonify({"success": False, "error": "No file part"}), 400

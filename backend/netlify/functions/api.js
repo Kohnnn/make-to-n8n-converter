@@ -1,8 +1,5 @@
-   // This file would need to be expanded into a proper serverless function
-   // Basic stub to show structure
-   exports.handler = async function(event, context) {
-    return {
-      statusCode: 200,
-      body: JSON.stringify({message: "API not yet implemented for serverless"})
-    };
-  }
+// Import the handler from the api.py file
+const { handler } = require('./api/api');
+
+// Export the handler to be used by Netlify Functions
+exports.handler = handler;

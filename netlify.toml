@@ -4,7 +4,7 @@
   command = "echo 'No build command'"
 
 [functions]
-  directory = "netlify/functions/"
+  directory = "backend/netlify/functions"
   node_bundler = "esbuild"
 
 [[redirects]]
