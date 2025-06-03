@@ -169,23 +169,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const file = files[0];
-        if (!file.name.toLowerCase().endsWith('.json') && file.type !== 'application/json') {
-            displayStatus('error', 'Invalid file type. Please upload a JSON file.');
+        
+        // Accept any file with .json extension
+        if (!file.name.toLowerCase().endsWith('.json')) {
+            displayStatus('error', 'Please upload a file with .json extension.');
             uploadedFile = null;
             uploadButton.disabled = true;
             return;
         }
 
+        // Read file content to verify it's valid JSON
         const reader = new FileReader();
         reader.onload = function(e) {
             try {
-                JSON.parse(e.target.result);
+                // Try to parse as JSON to validate
+                const content = e.target.result;
+                
+                // Check for HTML content
+                if (content.trim().startsWith('<!DOCTYPE') || content.trim().startsWith('<html')) {
+                    displayStatus('error', 'This appears to be an HTML file, not JSON. Please use the Export blueprint option in Make.com.');
+                    uploadedFile = null;
+                    uploadButton.disabled = true;
+                    return;
+                }
+                
+                // Try parsing the JSON
+                JSON.parse(content);
+                
+                // If successful, set the file and enable upload
                 uploadedFile = file;
                 displayStatus('success', `File selected: ${file.name}`);
                 uploadButton.disabled = false;
                 resetUI();
             } catch (error) {
-                displayStatus('error', 'Invalid JSON content. Please check your file.');
+                displayStatus('error', `Invalid JSON content: ${error.message}`);
                 uploadedFile = null;
                 uploadButton.disabled = true;
             }
@@ -200,10 +217,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Sample workflow button
     sampleWorkflowButton.addEventListener('click', () => {
-        // Create a blob from the sample workflow
+        // Create a blob from the sample workflow - ensure it's valid JSON
         const blob = new Blob([JSON.stringify(sampleWorkflow, null, 2)], { type: 'application/json' });
         
-        // Create a file from the blob
+        // Create a file from the blob with proper type
         const file = new File([blob], 'sample-make-workflow.json', { type: 'application/json' });
         
         // Set as the uploaded file
@@ -211,6 +228,9 @@ document.addEventListener('DOMContentLoaded', () => {
         displayStatus('success', 'Sample workflow loaded. Click "Upload & Convert" to process it.');
         uploadButton.disabled = false;
         resetUI();
+        
+        // Trigger conversion directly for convenience
+        uploadButton.click();
     });
 
     uploadButton.addEventListener('click', async () => {
@@ -233,6 +253,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 body: formData
             });
+
+            // First check if the response is JSON
+            const contentType = response.headers.get("content-type");
+            if (!contentType || !contentType.includes("application/json")) {
+                throw new Error("Received non-JSON response from server. Please check your backend configuration.");
+            }
 
             const result = await response.json();
 
