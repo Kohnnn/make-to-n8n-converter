@@ -1,0 +1,195 @@
+{
+  "telegram:SendReplyMessage": {
+    "n8n_type": "n8n-nodes-base.telegram",
+    "typeVersion": 1,
+    "parameters": {
+      "text": "text",
+      "chatId": "chatId",
+      "parseMode": "additionalFields.parse_mode",
+      "disableNotification": "additionalFields.disable_notification",
+      "disableWebPagePreview": "additionalFields.disable_web_page_preview"
+    }
+  },
+  "google-calendar:ActionGetEvents": {
+    "n8n_type": "n8n-nodes-base.googleCalendar",
+    "typeVersion": 1,
+    "operation": "event:getAll",
+    "parameters": {
+      "calendarId": "calendar",
+      "timeMin": "options.timeMin",
+      "timeMax": "options.timeMax",
+      "singleEvents": "options.singleEvents",
+      "query": "options.query",
+      "orderBy": "options.orderBy",
+      "maxResults": "options.maxResults"
+    }
+  },
+  "util:ComposeTransformer": {
+    "n8n_type": "n8n-nodes-base.set",
+    "typeVersion": 2,
+    "parameters": {
+      "value": "values.string[0].value"
+    }
+  },
+  "builtin:BasicRouter": {
+    "n8n_type": "n8n-nodes-base.switch",
+    "typeVersion": 1,
+    "parameters": {
+      "routes": "rules.values"
+    }
+  },
+  "weather:ActionGetDailyForecast": {
+    "n8n_type": "n8n-nodes-base.openWeatherMap",
+    "typeVersion": 1,
+    "operation": "weatherForecast",
+    "parameters": {
+      "city": "city",
+      "days": "options.cnt"
+    }
+  },
+  "util:Switcher": {
+    "n8n_type": "n8n-nodes-base.switch",
+    "typeVersion": 1,
+    "parameters": {
+      "input": "value1",
+      "casesTable": "rules.values",
+      "elseOutput": "options.fallbackOutput",
+      "useRegExpMatch": "options.caseSensitive"
+    }
+  },
+  "util:SetVariable": {
+    "n8n_type": "n8n-nodes-base.set",
+    "typeVersion": 2,
+    "parameters": {
+      "name": "values.string[0].name",
+      "scope": "values.string[0].type",
+      "value": "values.string[0].value"
+    }
+  },
+  "util:GetVariable": {
+    "n8n_type": "n8n-nodes-base.get",
+    "typeVersion": 1,
+    "parameters": {
+      "name": "name"
+    }
+  },
+  "util:TextAggregator": {
+    "n8n_type": "n8n-nodes-base.merge",
+    "typeVersion": 2,
+    "parameters": {
+      "feeder": "input",
+      "rowSeparator": "options.mode"
+    }
+  },
+  "gmail:ActionSendEmail": {
+    "n8n_type": "n8n-nodes-base.gmail",
+    "typeVersion": 1,
+    "operation": "send",
+    "parameters": {
+      "to": "to",
+      "subject": "subject",
+      "bodyText": "text",
+      "bodyHTML": "html",
+      "cc": "additionalFields.cc",
+      "bcc": "additionalFields.bcc",
+      "attachments": "additionalFields.attachments"
+    }
+  },
+  "gmail:ActionGetEmails": {
+    "n8n_type": "n8n-nodes-base.gmail",
+    "typeVersion": 1,
+    "operation": "getAll",
+    "parameters": {
+      "labelIds": "criteria.labelIds",
+      "q": "criteria.query",
+      "maxResults": "criteria.maxResults"
+    }
+  },
+  "slack:ActionSendMessage": {
+    "n8n_type": "n8n-nodes-base.slack",
+    "typeVersion": 1,
+    "operation": "post",
+    "parameters": {
+      "channel": "channel",
+      "text": "text",
+      "blocks": "attachments.blocks",
+      "username": "additionalFields.username",
+      "icon_emoji": "additionalFields.icon_emoji"
+    }
+  },
+  "webhook:CustomWebhook": {
+    "n8n_type": "n8n-nodes-base.webhook",
+    "typeVersion": 1,
+    "parameters": {
+      "path": "path",
+      "httpMethod": "method",
+      "responseMode": "additionalFields.responseMode"
+    }
+  },
+  "http:ActionSendData": {
+    "n8n_type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 3,
+    "parameters": {
+      "url": "url",
+      "method": "method",
+      "headers": "headers",
+      "query": "queryParams",
+      "body": "body"
+    }
+  },
+  "mysql:ExecuteQuery": {
+    "n8n_type": "n8n-nodes-base.mySql",
+    "typeVersion": 2,
+    "operation": "executeQuery",
+    "parameters": {
+      "query": "value"
+    }
+  },
+  "postgres:ExecuteQuery": {
+    "n8n_type": "n8n-nodes-base.postgres",
+    "typeVersion": 1,
+    "operation": "executeQuery",
+    "parameters": {
+      "query": "value"
+    }
+  },
+  "google-sheets:ActionAddRow": {
+    "n8n_type": "n8n-nodes-base.googleSheets",
+    "typeVersion": 3,
+    "operation": "appendData",
+    "parameters": {
+      "spreadsheetId": "spreadsheetId",
+      "sheetName": "sheetName",
+      "ranges": "range",
+      "data": "data"
+    }
+  },
+  "google-sheets:ActionGetCells": {
+    "n8n_type": "n8n-nodes-base.googleSheets",
+    "typeVersion": 3,
+    "operation": "getData",
+    "parameters": {
+      "spreadsheetId": "spreadsheetId",
+      "sheetName": "sheetName",
+      "ranges": "range",
+      "returnAllMatches": "options.returnAllMatches"
+    }
+  },
+  "discord:ActionSendMessage": {
+    "n8n_type": "n8n-nodes-base.discord",
+    "typeVersion": 1,
+    "operation": "message",
+    "parameters": {
+      "content": "content",
+      "channelId": "channelId",
+      "attachments": "options.attachments"
+    }
+  },
+  "util:ForEach": {
+    "n8n_type": "n8n-nodes-base.splitInBatches",
+    "typeVersion": 1,
+    "parameters": {
+      "batchSize": "1"
+    }
+  }
+}
