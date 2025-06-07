@@ -15,7 +15,7 @@ function createHandler(appPath, options = {}) {
   return (event, context, callback) => {
     const server = http.createServer((req, res) => {
       const python = spawn(
-        'python',
+        'python3',
         [
           '-u',
           '-c',
