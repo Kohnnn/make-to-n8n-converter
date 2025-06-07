@@ -557,7 +557,7 @@ FALLBACK_MODULE_MAPPINGS = {
     }
 }
 
-def convert_workflow(make_json):
+def perform_conversion(make_json):
     """
     Main function to convert a Make.com workflow to n8n format.
     """

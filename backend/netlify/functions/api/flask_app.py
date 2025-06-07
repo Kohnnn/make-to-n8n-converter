@@ -18,7 +18,7 @@ logger.info(f"Files in current directory: {os.listdir(current_dir)}")
 
 # Import the self-contained converter module
 try:
-    from converter import convert_workflow, FALLBACK_MODULE_MAPPINGS
+    from converter import perform_conversion, FALLBACK_MODULE_MAPPINGS
     logger.info("Successfully imported self-contained converter module")
 except Exception as e:
     logger.error(f"Error importing converter module: {str(e)}")
@@ -110,7 +110,7 @@ def convert_workflow():
             logger.info("Starting conversion process using self-contained converter")
             
             # Use the self-contained converter function
-            result = convert_workflow(make_json)
+            result = perform_conversion(make_json)
             logger.info("Conversion completed successfully")
             
             logger.info("Returning successful response")
