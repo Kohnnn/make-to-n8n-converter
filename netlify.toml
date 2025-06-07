@@ -1,20 +1,16 @@
 [build]
-  functions = "backend/netlify/functions"
+  functions = "netlify/functions"
   publish = "frontend"
-  command = "echo 'No build command'"
 
 [functions]
-  directory = "backend/netlify/functions"
-  node_bundler = "esbuild"
+  directory = "netlify/functions"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-[[headers]]
-  for = "/*"
-    [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
-    Access-Control-Allow-Headers = "Content-Type"
