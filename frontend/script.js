@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // API endpoint for Netlify Functions
-    const API_ENDPOINT = '/.netlify/functions/api';
+    const API_ENDPOINT = '/api';
     
     const dropArea = document.getElementById('drop-area');
     const fileInput = document.getElementById('fileInput');
