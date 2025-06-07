@@ -4,6 +4,7 @@
   "description": "Netlify Functions for Make.com to n8n converter",
   "main": "index.js",
   "dependencies": {
-    "@netlify/functions": "^1.6.0"
+    "@netlify/functions": "^1.6.0",
+    "netlify-lambda-wsgi": "^0.1.9"
   }
 }
